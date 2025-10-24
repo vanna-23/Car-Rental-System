@@ -1,0 +1,87 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Manage Bookings{% endblock %}
+{% block page_title %}Manage Bookings{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Car</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dates</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Days</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for booking in bookings %}
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 text-sm text-gray-900">#{{ booking.id }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-900">{{ booking.user_name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                        {{ booking.user_email }}<br>
+                        <span class="text-xs">{{ booking.phone if booking.phone else 'N/A' }}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-900">
+                        <strong>{{ booking.car_name }}</strong><br>
+                        <span class="text-xs text-gray-500">{{ booking.brand }} - {{ booking.category }}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                        <div>{{ booking.pickup_date }}</div>
+                        <div>{{ booking.return_date }}</div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-900">{{ booking.total_days }}</td>
+                    <td class="px-6 py-4 text-sm font-semibold text-gray-900">
+                        {{ booking.total_cost|khr }}<br>
+                        <span class="text-xs text-gray-500">${{ "%.2f"|format(booking.total_cost) }}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <select onchange="updateStatus({{ booking.id }}, this.value)" 
+                                class="px-3 py-1 rounded-full text-xs font-semibold border-0
+                                {% if booking.status == 'confirmed' %}bg-green-100 text-green-800
+                                {% elif booking.status == 'pending' %}bg-yellow-100 text-yellow-800
+                                {% elif booking.status == 'cancelled' %}bg-red-100 text-red-800
+                                {% else %}bg-blue-100 text-blue-800{% endif %}">
+                            <option value="pending" {% if booking.status == 'pending' %}selected{% endif %}>PENDING</option>
+                            <option value="confirmed" {% if booking.status == 'confirmed' %}selected{% endif %}>CONFIRMED</option>
+                            <option value="completed" {% if booking.status == 'completed' %}selected{% endif %}>COMPLETED</option>
+                            <option value="cancelled" {% if booking.status == 'cancelled' %}selected{% endif %}>CANCELLED</option>
+                        </select>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600">
+                        <span class="text-xs">{{ booking.created_at }}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+async function updateStatus(bookingId, newStatus) {
+    try {
+        const response = await fetch(`/admin/bookings/update/${bookingId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        });
+        
+        if (response.ok) {
+            location.reload();
+        } else {
+            alert('Failed to update booking status');
+        }
+    } catch (error) {
+        alert('Error updating booking');
+    }
+}
+</script>
+{% endblock %}
