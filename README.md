@@ -99,7 +99,7 @@ http://localhost:5000
 ## 📁 Project Structure
 
 ```
-car-good/
+Car-Rantal-System
 ├── app.py                      # Main Flask application
 ├── db_config.py                # Database configuration
 ├── setup_database.py           # Database setup wizard
