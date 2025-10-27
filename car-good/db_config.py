@@ -39,6 +39,34 @@ def init_database():
             )
         """)
         
+        # Create admin_accounts table
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS admin_accounts (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(255) UNIQUE NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
+        # Create cars table
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS cars (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                category VARCHAR(100) NOT NULL,
+                price DECIMAL(10, 2) NOT NULL,
+                image TEXT,
+                seats INT NOT NULL,
+                transmission VARCHAR(50) NOT NULL,
+                color VARCHAR(50),
+                features TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
         # Create bookings table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS bookings (
@@ -54,12 +82,19 @@ def init_database():
                 total_cost DECIMAL(10, 2) NOT NULL,
                 status VARCHAR(50) DEFAULT 'confirmed',
                 booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (user_email) REFERENCES users(email)
+                FOREIGN KEY (user_email) REFERENCES users(email) ON DELETE CASCADE
             )
         """)
         
+        # Insert default admin account
+        cursor.execute("""
+            INSERT IGNORE INTO admin_accounts (username, name, email, password)
+            VALUES ('admin', 'Administrator', 'admin@luxedrive.com', '0707200717')
+        """)
+        
         connection.commit()
-        print("Database tables created successfully!")
+        print("✅ Database tables created successfully!")
+        print("✅ Default admin account created: admin / 0707200717")
         return True
         
     except Error as e:

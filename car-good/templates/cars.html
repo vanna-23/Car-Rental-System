@@ -52,17 +52,18 @@
         </div>
 
         {% if cars %}
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="carsGrid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="carsGrid">
             {% for car in cars %}
-            <div class="car-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300" data-index="{{ loop.index0 }}" style="display: {{ 'block' if loop.index0 < 8 else 'none' }}">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="{{ car.image }}" alt="{{ car.name }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
-                    <div class="absolute top-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            <div class="car-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl" data-index="{{ loop.index0 }}">
+                <div class="relative h-56 overflow-hidden group">
+                    <img src="{{ car.image }}" alt="{{ car.name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                    <div class="absolute top-3 right-3 bg-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
                         {{ car.category }}
                     </div>
                     {% if car.color is defined %}
-                    <div class="absolute top-3 left-3 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-xs">
-                        {{ car.color }}
+                    <div class="absolute top-3 left-3 bg-black bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-medium">
+                        <i class="fas fa-palette mr-1"></i>{{ car.color }}
                     </div>
                     {% endif %}
                 </div>

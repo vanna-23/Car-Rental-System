@@ -6,6 +6,7 @@
     <title>{% block title %}LuxeDrive Car Rental{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -73,12 +74,25 @@
                     <a href="/about" class="text-gray-700 hover:text-purple-600 transition">About</a>
                     <a href="/contact" class="text-gray-700 hover:text-purple-600 transition">Contact</a>
                     <div id="authButtons">
-                        <a href="/login" class="text-gray-700 hover:text-purple-600 transition mr-3">Login</a>
+                        <a href="/login" class="text-gray-700 hover:text-purple-600 transition mr-3">Customer Login</a>
+                        <a href="/admin/login" class="text-white bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 px-4 py-2 rounded-lg transition shadow-md mr-3">
+                            <i class="fas fa-shield-alt mr-1"></i>Admin
+                        </a>
                         <a href="/signup" class="btn-primary text-white px-4 py-2 rounded-lg">Sign Up</a>
                     </div>
                     <div id="userInfo" class="hidden">
                         <span class="text-gray-700 mr-3">Hello, <span id="userName" class="font-semibold"></span></span>
                         <a href="/logout" class="text-red-600 hover:text-red-700 transition">Logout</a>
+                    </div>
+                    <div id="adminInfo" class="hidden flex items-center space-x-4">
+                        <a href="/admin/dashboard" class="text-gray-700 hover:text-orange-600 transition">
+                            <i class="fas fa-tachometer-alt mr-1"></i>Dashboard
+                        </a>
+                        <a href="/admin/add-car" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-4 py-2 rounded-lg transition shadow-md">
+                            <i class="fas fa-plus-circle mr-1"></i>Add Car
+                        </a>
+                        <span class="text-orange-600"><i class="fas fa-shield-alt"></i> <span id="adminName" class="font-semibold"></span></span>
+                        <a href="/admin/logout" class="text-red-600 hover:text-red-700 transition">Logout</a>
                     </div>
                 </div>
                 
@@ -103,12 +117,32 @@
                     <a href="/contact" class="text-gray-700 hover:text-purple-600 transition py-2">Contact</a>
                     <hr class="my-4">
                     <div id="mobileAuthButtons">
-                        <a href="/login" class="block text-gray-700 hover:text-purple-600 transition py-2">Login</a>
-                        <a href="/signup" class="block btn-primary text-white px-4 py-2 rounded-lg text-center mt-2">Sign Up</a>
+                        <a href="/login" class="block text-gray-700 hover:text-purple-600 transition py-2">Customer Login</a>
+                        <a href="/signup" class="block btn-primary text-white px-4 py-2 rounded-lg text-center mt-2">Customer Sign Up</a>
+                        <hr class="my-2">
+                        <p class="text-xs text-gray-500 uppercase font-semibold mb-2">Admin Access</p>
+                        <a href="/admin/login" class="block text-white bg-gradient-to-r from-orange-500 to-red-600 px-4 py-2 rounded-lg text-center">
+                            <i class="fas fa-sign-in-alt mr-1"></i>Admin Login
+                        </a>
+                        <a href="/admin/signup" class="block text-white bg-gradient-to-r from-red-500 to-orange-600 px-4 py-2 rounded-lg text-center mt-2">
+                            <i class="fas fa-user-plus mr-1"></i>Admin Sign Up
+                        </a>
                     </div>
                     <div id="mobileUserInfo" class="hidden">
                         <span class="text-gray-700 block mb-2">Hello, <span id="mobileUserName" class="font-semibold"></span></span>
                         <a href="/logout" class="block text-red-600 hover:text-red-700 transition py-2">Logout</a>
+                    </div>
+                    <div id="mobileAdminInfo" class="hidden">
+                        <span class="text-orange-600 block mb-3"><i class="fas fa-shield-alt"></i> Admin: <span id="mobileAdminName" class="font-semibold"></span></span>
+                        <a href="/admin/dashboard" class="block text-gray-700 hover:text-orange-600 transition py-2">
+                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                        </a>
+                        <a href="/admin/add-car" class="block bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-lg text-center mt-2">
+                            <i class="fas fa-plus-circle mr-2"></i>Add Car
+                        </a>
+                        <a href="/admin/logout" class="block text-red-600 hover:text-red-700 transition py-2 mt-2">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </a>
                     </div>
                 </div>
             </div>
@@ -134,8 +168,8 @@
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="/" class="hover:text-purple-500 transition">Home</a></li>
                         <li><a href="/cars" class="hover:text-purple-500 transition">Cars</a></li>
-                        <li><a href="#about" class="hover:text-purple-500 transition">About</a></li>
-                        <li><a href="#contact" class="hover:text-purple-500 transition">Contact</a></li>
+                        <li><a href="/about" class="hover:text-purple-500 transition">About</a></li>
+                        <li><a href="/contact" class="hover:text-purple-500 transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>
@@ -153,6 +187,7 @@
                         <a href="#" class="text-gray-400 hover:text-purple-500 transition text-2xl"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="text-gray-400 hover:text-purple-500 transition text-2xl"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-gray-400 hover:text-purple-500 transition text-2xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/vanna-23/Car-Rental-System" class="text-gray-400 hover:text-purple-500 transition text-2xl"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -180,7 +215,17 @@
         fetch('/api/check-session')
             .then(res => res.json())
             .then(data => {
-                if (data.logged_in) {
+                if (data.admin) {
+                    // Admin is logged in
+                    document.getElementById('authButtons').classList.add('hidden');
+                    document.getElementById('adminInfo').classList.remove('hidden');
+                    document.getElementById('adminName').textContent = data.admin_name;
+                    
+                    document.getElementById('mobileAuthButtons').classList.add('hidden');
+                    document.getElementById('mobileAdminInfo').classList.remove('hidden');
+                    document.getElementById('mobileAdminName').textContent = data.admin_name;
+                } else if (data.logged_in) {
+                    // Regular user is logged in
                     document.getElementById('authButtons').classList.add('hidden');
                     document.getElementById('userInfo').classList.remove('hidden');
                     document.getElementById('userName').textContent = data.name;

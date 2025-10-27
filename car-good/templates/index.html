@@ -1,6 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Promotional Banner -->
+<div class="bg-gradient-to-r from-green-600 to-green-500 text-white py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center sm:text-left">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-tags text-xl"></i>
+                <span class="font-bold">Special Offers:</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
+                    <i class="fas fa-calendar-week mr-1"></i>50% OFF Friday-Monday Rentals
+                </span>
+                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
+                    <i class="fas fa-gift mr-1"></i>20% OFF on First Booking After Login
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Hero Section -->
 <section class="gradient-bg text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,11 +73,12 @@
             <a href="/cars" class="text-purple-600 font-semibold hover:text-purple-700 transition">View All <i class="fas fa-arrow-right ml-2"></i></a>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {% for car in cars[:8] %}
-            <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="{{ car.image }}" alt="{{ car.name }}" class="w-full h-full object-cover">
+        {% if featured_cars %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for car in featured_cars %}
+            <div class="car-card bg-white rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+                <div class="relative h-56 overflow-hidden">
+                    <img src="{{ car.image }}" alt="{{ car.name }}" class="w-full h-full object-cover transition duration-500 hover:scale-110">
                     <div class="absolute top-3 right-3 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                         {{ car.category }}
                     </div>
@@ -77,10 +98,10 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <span class="text-2xl font-bold text-purple-600">${{ car.price }}</span>
+                            <span class="text-3xl font-bold text-purple-600">${{ car.price }}</span>
                             <span class="text-gray-500 text-sm">/day</span>
                         </div>
-                        <a href="/car/{{ car.id }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition text-sm">
+                        <a href="/car/{{ car.id }}" class="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-5 py-2.5 rounded-lg hover:from-purple-700 hover:to-purple-800 transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm font-semibold">
                             View Details
                         </a>
                     </div>
@@ -88,6 +109,13 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="text-center py-16">
+            <i class="fas fa-car text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-2xl font-bold text-gray-600 mb-2">No Cars Available</h3>
+            <p class="text-gray-500">All cars are currently booked. Check back soon!</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 
