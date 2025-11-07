@@ -1474,8 +1474,28 @@ def admin_login():
 def admin_dashboard():
     if 'admin' not in session:
         return redirect(url_for('admin_login_page'))
+    
+    # Fetch all cars from database
+    cars = get_all_cars()
+    
+    # Get total bookings count
+    total_bookings = 0
+    try:
+        conn = get_db_connection()
+        if conn:
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT COUNT(*) as count FROM bookings")
+            result = cursor.fetchone()
+            total_bookings = result['count'] if result else 0
+            cursor.close()
+            conn.close()
+    except Exception as e:
+        print(f"Error fetching bookings count: {e}")
 
-    return render_template('admin/dashboard.html')
+    return render_template('admin/dashboard.html', 
+                         cars=cars, 
+                         total_cars=len(cars),
+                         total_bookings=total_bookings)
 
 
 @app.route('/admin/logout')
