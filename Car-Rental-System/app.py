@@ -389,7 +389,7 @@ def get_admin_accounts():
             email_key = (admin.get('email') or '').strip().lower()
             if email_key:
                 admin['email'] = email_key
-                admin_dict[email_key] = admin
+                admin_dict[email_key] = adminx
         return admin_dict
     except Error as e:
         print(f"Error fetching admins: {e}")
