@@ -2,24 +2,36 @@
 
 {% block content %}
 <!-- Promotional Banner -->
-<div class="bg-gradient-to-r from-green-600 to-green-500 text-white py-3">
+<div class="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 text-white py-4 animate-gradient">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-center sm:text-left">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-center sm:text-left">
             <div class="flex items-center gap-2">
-                <i class="fas fa-tags text-xl"></i>
-                <span class="font-bold">Special Offers:</span>
+                <i class="fas fa-fire text-2xl animate-pulse"></i>
+                <span class="font-bold text-lg">Hot Deals!</span>
             </div>
-            <div class="flex flex-col sm:flex-row gap-2 sm:gap-6">
-                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
-                    <i class="fas fa-calendar-week mr-1"></i>50% OFF Friday-Monday Rentals
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <span class="bg-white text-purple-600 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform hover:scale-105 transition">
+                    <i class="fas fa-calendar-week mr-1"></i>🎉 30% OFF Saturday & Sunday
                 </span>
-                <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-semibold">
-                    <i class="fas fa-gift mr-1"></i>20% OFF on First Booking After Login
+                <span class="bg-yellow-400 text-purple-800 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform hover:scale-105 transition">
+                    <i class="fas fa-gift mr-1"></i>20% OFF First Booking
                 </span>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+</style>
 
 <!-- Hero Section -->
 <section class="gradient-bg text-white py-20">

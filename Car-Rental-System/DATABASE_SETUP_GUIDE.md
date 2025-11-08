@@ -49,7 +49,7 @@ This script will:
 
 **Default Admin Credentials:**
 - **Email:** `admin@luxedrive.com`
-- **Password:** `0707200717`
+- **Password:** `Admin@123`
 
 ---
 
@@ -84,7 +84,7 @@ Run the SQL commands in `database_schema.sql` or use the Python script.
 ### Step 3: Create Admin Account
 
 ```python
-python -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('0707200717'))"
+python -c "from werkzeug.security import generate_password_hash; print(generate_password_hash('Admin@123'))"
 ```
 
 Then insert into database:
@@ -272,7 +272,7 @@ SELECT 'bookings', COUNT(*) FROM bookings;
 
 3. Login with:
    - Email: `admin@luxedrive.com`
-   - Password: `0707200717`
+   - Password: `Admin@123`
 
 ---
 

@@ -72,7 +72,7 @@ The app will automatically:
 After first run, you can login with:
 - **URL:** http://localhost:5000/admin/login
 - **Email:** admin@luxedrive.com
-- **Password:** 0707200717
+- **Password:** Admin@123
 
 ---
 

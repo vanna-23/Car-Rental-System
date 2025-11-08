@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════════╗
+║           🔐 ADMIN LOGIN CREDENTIALS - QUICK REFERENCE        ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│  ADMIN LOGIN INFORMATION                                     │
+└──────────────────────────────────────────────────────────────┘
+
+  📧 Email:     admin@luxedrive.com
+  🔑 Password:  AdminLuxe2024!
+  👤 Name:      LuxeDrive Admin
+  📱 Phone:     1234567890
+
+┌──────────────────────────────────────────────────────────────┐
+│  ACCESS URLS                                                 │
+└──────────────────────────────────────────────────────────────┘
+
+  🌐 Admin Login:      http://localhost:5000/admin/login
+  📊 Admin Dashboard:  http://localhost:5000/admin/dashboard
+  🏠 Customer Site:    http://localhost:5000/
+
+┌──────────────────────────────────────────────────────────────┐
+│  QUICK START                                                 │
+└──────────────────────────────────────────────────────────────┘
+
+  1. Start MySQL:      net start MySQL80
+  2. Run Application:  python app.py
+  3. Open Browser:     http://localhost:5000/admin/login
+  4. Login with credentials above
+
+┌──────────────────────────────────────────────────────────────┐
+│  DATABASE CONNECTION                                         │
+└──────────────────────────────────────────────────────────────┘
+
+  Host:         localhost
+  User:         root
+  Password:     (empty / no password)
+  Database:     car_rental_db
+  
+  ⚠️  If your MySQL has a password, update db_config.py line 11
+
+┌──────────────────────────────────────────────────────────────┐
+│  CHANGE ADMIN PASSWORD                                       │
+└──────────────────────────────────────────────────────────────┘
+
+  File:  db_config.py
+  Line:  137
+  
+  YOUR_CUSTOM_PASSWORD = 'AdminLuxe2024!'  # ← Change this
+
+  After changing:
+  1. Delete old admin: DELETE FROM admin_accounts;
+  2. Restart app:       python app.py
+
+┌──────────────────────────────────────────────────────────────┐
+│  TEST CONNECTION                                             │
+└──────────────────────────────────────────────────────────────┘
+
+  python test_db_connection.py
+  
+  This will verify:
+  ✓ MySQL connection
+  ✓ Database setup
+  ✓ Admin account
+  ✓ Password verification
+
+┌──────────────────────────────────────────────────────────────┐
+│  DOCUMENTATION FILES                                         │
+└──────────────────────────────────────────────────────────────┘
+
+  📄 START_HERE.md               - Quick start guide
+  📄 ADMIN_CREDENTIALS.md        - Complete admin documentation
+  📄 SETUP_GUIDE.md              - Full setup instructions
+  📄 MYSQL_PASSWORD_CONFIG.md    - MySQL password help
+  📄 DATABASE_SETUP_GUIDE.md     - Database configuration
+
+┌──────────────────────────────────────────────────────────────┐
+│  TROUBLESHOOTING                                             │
+└──────────────────────────────────────────────────────────────┘
+
+  Problem: Can't connect to MySQL
+  Solution: net start MySQL80
+
+  Problem: Access denied
+  Solution: Update password in db_config.py (lines 11 & 33)
+
+  Problem: Admin login fails
+  Solution: Check credentials above, ensure URL is /admin/login
+
+  Problem: Database doesn't exist
+  Solution: Run python app.py (auto-creates database)
+
+╔══════════════════════════════════════════════════════════════╗
+║  🚀 READY TO GO? Run: python app.py                          ║
+╚══════════════════════════════════════════════════════════════╝

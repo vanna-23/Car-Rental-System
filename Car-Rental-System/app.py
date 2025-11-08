@@ -1079,8 +1079,9 @@ def get_available_cars():
 
 def check_weekend_discount(pickup_date, return_date):
     """
-    Check if the rental period includes Friday to Monday.
-    Returns True if any day in the rental period is Friday, Saturday, Sunday, or Monday.
+    Check if the rental period includes Saturday or Sunday.
+    Returns True if any day in the rental period is Saturday or Sunday.
+    🎉 30% OFF for weekend rentals!
     """
     try:
         pickup = datetime.strptime(pickup_date, '%Y-%m-%d')
@@ -1091,8 +1092,8 @@ def check_weekend_discount(pickup_date, return_date):
         while current_date <= return_dt:
             # weekday(): Monday=0, Tuesday=1, Wednesday=2, Thursday=3, Friday=4, Saturday=5, Sunday=6
             day_of_week = current_date.weekday()
-            # Check if it's Friday (4), Saturday (5), Sunday (6), or Monday (0)
-            if day_of_week in [0, 4, 5, 6]:
+            # Check if it's Saturday (5) or Sunday (6)
+            if day_of_week in [5, 6]:
                 return True
             current_date += timedelta(days=1)
         
@@ -1336,12 +1337,12 @@ def book_car(car_id):
         discounts_applied = []
         discount_amount = 0
         
-        # Check for weekend discount (Friday to Monday) - 50% off
+        # Check for weekend discount (Saturday & Sunday) - 30% off
         weekend_discount = check_weekend_discount(pickup_date, return_date)
         if weekend_discount:
-            weekend_discount_amount = base_cost * 0.5
+            weekend_discount_amount = base_cost * 0.3
             discount_amount += weekend_discount_amount
-            discounts_applied.append('Weekend Special (50%)')
+            discounts_applied.append('🎉 Weekend Special (30%)')
         
         # Check for login/signup discount - 20% off
         if session.get('login_discount', False):
@@ -1431,28 +1432,44 @@ def admin_login_page():
 
 @app.route('/admin/login', methods=['POST'])
 def admin_login():
-    """Admin login - only requires email and password"""
+    """Admin login - requires all 4 fields: fullname, email, phone, and password"""
     data = request.get_json(silent=True) or request.form or {}
 
     if not isinstance(data, dict):
         data = data.to_dict()
 
+    fullname = (data.get('fullname') or '').strip()
     email = (data.get('email') or '').strip().lower()
+    phone = (data.get('phone') or '').strip()
     password = data.get('password')
 
-    # Only require email and password (normal login)
-    if not email or not password:
-        return jsonify({'success': False, 'message': 'Email and password are required'}), 400
+    # Require all 4 fields
+    if not fullname or not email or not phone or not password:
+        return jsonify({'success': False, 'message': 'All fields are required (Full Name, Email, Phone, Password)'}), 400
 
+    # Get admin from MySQL database
     admins = get_admin_accounts()
     admin = admins.get(email)
 
     if not admin:
-        return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
 
+    # Validate all 4 fields match the database
+    stored_fullname = (admin.get('fullname') or '').strip()
+    stored_phone = normalize_phone(admin.get('phone') or '')
+    input_phone = normalize_phone(phone)
     stored_password = admin.get('password')
-    password_matches = False
+    
+    # Check fullname match (case-insensitive)
+    if stored_fullname.lower() != fullname.lower():
+        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+    
+    # Check phone match
+    if stored_phone != input_phone:
+        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
 
+    # Check password (supports both hashed and plain text)
+    password_matches = False
     if stored_password:
         try:
             # Try hashed password first
@@ -1462,9 +1479,9 @@ def admin_login():
             password_matches = stored_password == password
 
     if not password_matches:
-        return jsonify({'success': False, 'message': 'Invalid email or password'}), 401
+        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
 
-    # Login successful
+    # Login successful - all 4 fields matched
     session['admin'] = email
     session['admin_name'] = admin.get('fullname')
     return jsonify({'success': True, 'message': 'Admin login successful'})

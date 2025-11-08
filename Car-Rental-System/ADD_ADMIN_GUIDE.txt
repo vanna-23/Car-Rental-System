@@ -1,0 +1,186 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║              HOW TO ADD NEW ADMIN ACCOUNTS TO MYSQL               ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────────┐
+│  METHOD 1: INTERACTIVE SCRIPT (EASIEST!) ⭐                       │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Step 1: Run the script                                           │
+│  ────────────────────────────                                     │
+│  > python add_admin.py                                            │
+│                                                                   │
+│  Step 2: Enter your details                                       │
+│  ─────────────────────────────                                    │
+│  👤 Full Name: [Your Name]                                        │
+│  📧 Email:     [your@email.com]                                   │
+│  📱 Phone:     [1234567890]                                       │
+│  🔑 Password:  [your_password]                                    │
+│                                                                   │
+│  Step 3: Confirm                                                  │
+│  ─────────────────                                                │
+│  Create this admin account? (yes/no): yes                         │
+│                                                                   │
+│  ✅ DONE! Account created and password auto-hashed!               │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  METHOD 2: ADD MULTIPLE ADMINS AT ONCE                            │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Step 1: Run demo script                                          │
+│  ──────────────────────────                                       │
+│  > python demo_add_admin.py                                       │
+│                                                                   │
+│  This will add 3 sample admins:                                   │
+│                                                                   │
+│  ✅ Len Vanna     - vanna@gmail.com - Vanna@123                   │
+│  ✅ Admin User    - admin@luxedrive.com - Admin@123               │
+│  ✅ Manager       - manager@luxedrive.com - Manager@123           │
+│                                                                   │
+│  All passwords are auto-hashed securely!                          │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  METHOD 3: EDIT SCRIPT AND ADD CUSTOM ADMINS                      │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Step 1: Open add_admin.py in your editor                         │
+│                                                                   │
+│  Step 2: Add this at the bottom:                                  │
+│  ──────────────────────────────────                               │
+│  add_admin_account(                                               │
+│      "Your Name",                                                 │
+│      "your@email.com",                                            │
+│      "1234567890",                                                │
+│      "your_password"                                              │
+│  )                                                                │
+│                                                                   │
+│  Step 3: Save and run                                             │
+│  ─────────────────────                                            │
+│  > python add_admin.py                                            │
+│                                                                   │
+│  ✅ Account created instantly!                                    │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  METHOD 4: USING PHPMYADMIN (MANUAL)                              │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Step 1: Hash your password first                                 │
+│  ───────────────────────────────────                              │
+│  > python hash_password.py                                        │
+│  Enter password: your_password                                    │
+│  Hashed: scrypt:32768:8:1$xxxxx...                               │
+│                                                                   │
+│  Step 2: Open phpMyAdmin                                          │
+│  ──────────────────────────                                       │
+│  http://localhost/phpmyadmin                                      │
+│                                                                   │
+│  Step 3: Navigate to table                                        │
+│  ─────────────────────────                                        │
+│  car_rental_db → admin_accounts → Insert                          │
+│                                                                   │
+│  Step 4: Fill in the form                                         │
+│  ───────────────────────────                                      │
+│  fullname: Your Name                                              │
+│  email:    your@email.com                                         │
+│  phone:    1234567890                                             │
+│  password: [paste the hashed password from Step 1]                │
+│                                                                   │
+│  Step 5: Click "Go"                                               │
+│                                                                   │
+│  ✅ Account added manually!                                       │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  📋 EXAMPLES                                                      │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Example 1: Add yourself                                          │
+│  ────────────────────────                                         │
+│  Full Name: Len Vanna                                             │
+│  Email:     vanna@example.com                                     │
+│  Phone:     0987654321                                            │
+│  Password:  MyPassword123                                         │
+│                                                                   │
+│  Example 2: Add manager                                           │
+│  ─────────────────────────                                        │
+│  Full Name: John Manager                                          │
+│  Email:     john@company.com                                      │
+│  Phone:     0123456789                                            │
+│  Password:  Manager@2024                                          │
+│                                                                   │
+│  Example 3: Add supervisor                                        │
+│  ──────────────────────────                                       │
+│  Full Name: Sarah Smith                                           │
+│  Email:     sarah@company.com                                     │
+│  Phone:     5551234567                                            │
+│  Password:  Sarah#Super                                           │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  ✅ AFTER ADDING ADMIN                                            │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  You can immediately login at:                                    │
+│  http://localhost:5000/admin/login                                │
+│                                                                   │
+│  Enter ALL 4 fields:                                              │
+│  - Full Name (case-insensitive)                                   │
+│  - Email (automatically lowercase)                                │
+│  - Phone (digits only)                                            │
+│  - Password (exactly as you set it)                               │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  🛠️ USEFUL COMMANDS                                               │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  Add new admin (interactive):                                     │
+│  > python add_admin.py                                            │
+│                                                                   │
+│  Add sample admins (demo):                                        │
+│  > python demo_add_admin.py                                       │
+│                                                                   │
+│  Hash a password:                                                 │
+│  > python hash_password.py                                        │
+│                                                                   │
+│  View all admins:                                                 │
+│  > python verify_admin.py                                         │
+│                                                                   │
+│  Test login validation:                                           │
+│  > python test_4_field_login.py                                   │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────────┐
+│  🔒 SECURITY NOTES                                                │
+├───────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  ✓ Passwords are automatically hashed with scrypt/pbkdf2         │
+│  ✓ Never store plain text passwords in database                  │
+│  ✓ Email addresses are converted to lowercase                    │
+│  ✓ Duplicate emails are prevented                                │
+│  ✓ All 4 fields are required for login                           │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+╔═══════════════════════════════════════════════════════════════════╗
+║  🎯 QUICK START: Just run "python add_admin.py" and follow the   ║
+║     prompts to add your first admin account!                      ║
+╚═══════════════════════════════════════════════════════════════════╝

@@ -132,18 +132,27 @@ def init_database():
         admin_count = cursor.fetchone()[0]
         
         if admin_count == 0:
+            # ⚠️ ADMIN PASSWORD CONFIGURATION ⚠️
+            # Custom admin password set below - Change this if needed
+            YOUR_CUSTOM_PASSWORD = 'AdminLuxe2024!'  # 👈 Custom secure password
+            
             # Insert default admin account with hashed password
-            default_password = generate_password_hash('0707200717')
+            default_password = generate_password_hash(YOUR_CUSTOM_PASSWORD)
             cursor.execute("""
                 INSERT INTO admin_accounts (fullname, email, phone, password) 
                 VALUES (%s, %s, %s, %s)
-            """, ('Admin', 'admin@luxedrive.com', '1234567890', default_password))
+            """, ('LuxeDrive Admin', 'admin@luxedrive.com', '1234567890', default_password))
             conn.commit()
-            print("Default admin account created:")
-            print("   Email: admin@luxedrive.com")
-            print("   Full Name: Admin")
-            print("   Phone: 1234567890")
-            print("   Password: 0707200717")
+            print("\n" + "="*60)
+            print("✅ DEFAULT ADMIN ACCOUNT CREATED SUCCESSFULLY!")
+            print("="*60)
+            print("   📧 Email: admin@luxedrive.com")
+            print("   👤 Full Name: LuxeDrive Admin")
+            print("   📱 Phone: 1234567890")
+            print(f"   🔑 Password: {YOUR_CUSTOM_PASSWORD}")
+            print("="*60)
+            print("⚠️  SAVE THESE CREDENTIALS - You'll need them to login!")
+            print("="*60 + "\n")
         
         cursor.close()
         conn.close()

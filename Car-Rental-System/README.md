@@ -30,7 +30,7 @@ A modern, full-featured car rental web application built with Python Flask, Tail
 - 💾 Persistent user data (with database)
 
 ### **Admin Panel**
-- 🛡️ Separate admin authentication (admin/0707200717)
+- 🛡️ Separate admin authentication (admin/Admin@123)
 - ➕ Admin signup with access code
 - ➕ Add new cars via navbar button
 - ✏️ Edit existing cars
@@ -85,7 +85,7 @@ python app.py
 http://localhost:5000
 ```
 
-**Default Admin:** `admin` / `0707200717`
+**Default Admin:** `admin` / `Admin@123`
 
 ## 📚 Documentation
 
@@ -188,8 +188,8 @@ car-good/
 
 ### Admin Panel Access
 1. Go to http://localhost:5000/admin/login
-2. Login with: `admin` / `0707200717`
-3. Or signup with access code: `0707200717`
+2. Login with: `admin` / `Admin@123`
+3. Or signup with access code: `Admin@123`
 
 ### Managing Cars (Admin)
 - **Add Car**: Click green "Add Car" button in navbar
@@ -213,7 +213,7 @@ car-good/
 ### Security
 - Session-based authentication
 - Separate admin and customer sessions
-- Admin access code required (`0707200717`)
+- Admin access code required (`Admin@123`)
 - Password protected accounts
 
 ## 🌐 Pages
@@ -245,7 +245,7 @@ car-good/
 ### Default Admin
 - Username: `admin`
 - Email: `admin@luxedrive.com`
-- Password: `0707200717`
+- Password: `Admin@123`
 
 ## 📱 Responsive Breakpoints
 

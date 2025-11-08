@@ -30,14 +30,20 @@ def check_admins():
                 print(f"   Created: {admin['created_at']}")
         
         print("\n" + "="*60)
-        print("🔑 TO LOGIN, YOU NEED ALL 4 FIELDS:")
+        print("🔑 LOGIN CREDENTIALS (Use ALL 4 fields):")
         print("="*60)
         if admins:
             admin = admins[0]
             print(f"   Full Name: {admin['fullname']}")
             print(f"   Email: {admin['email']}")
             print(f"   Phone: {admin['phone']}")
-            print(f"   Password: 0707200717")
+            # Show if password is hashed or plain text
+            pwd = admin['password']
+            is_hashed = pwd.startswith(('scrypt:', 'pbkdf2:'))
+            if is_hashed:
+                print(f"   Password: [HASHED - Contact admin for password]")
+            else:
+                print(f"   Password: {pwd}")
         print("="*60 + "\n")
         
         cursor.close()

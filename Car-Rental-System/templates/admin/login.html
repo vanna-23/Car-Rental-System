@@ -126,7 +126,7 @@
                                 </div>
                                 <input type="text" id="fullname" name="fullname" required
                                     class="pl-11 w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
-                                    placeholder="put your name">
+                                    placeholder="nana cute">
                             </div>
                         </div>
                         <div>
@@ -137,7 +137,7 @@
                                 </div>
                                 <input type="email" id="email" name="email" required
                                     class="pl-11 w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
-                                    placeholder="put your email">
+                                    placeholder="cute@gmail.com">
                             </div>
                         </div>
 
@@ -149,7 +149,7 @@
                                 </div>
                                 <input type="tel" id="phone" name="phone" required
                                     class="pl-11 w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
-                                    placeholder="put your phone number">
+                                    placeholder="0987654321">
                             </div>
                         </div>
                         <div>
@@ -160,7 +160,7 @@
                                 </div>
                                 <input type="password" id="password" name="password" required
                                     class="pl-11 w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition"
-                                    placeholder="put your password">
+                                    placeholder="123456789">
                                 <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-white/80 transition" aria-label="Toggle password visibility">
                                     <i class="far fa-eye"></i>
                                 </button>
@@ -205,17 +205,17 @@
         adminLoginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('email').value.trim().toLowerCase();
-            const password = passwordInput.value;
             const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
             const phone = document.getElementById('phone').value.trim();
+            const password = passwordInput.value;
 
             errorMessage.classList.add('hidden');
             errorText.textContent = '';
             setLoadingState(true);
 
             if (!fullname || !email || !phone || !password) {
-                showError('Full name, email, phone, and password are all required.');
+                showError('All fields are required.');
                 setLoadingState(false);
                 return;
             }
@@ -226,7 +226,7 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, password, fullname, phone })
+                    body: JSON.stringify({ fullname, email, phone, password })
                 });
 
                 const data = await response.json();

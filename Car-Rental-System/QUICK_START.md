@@ -29,7 +29,7 @@ Visit: **http://localhost:5000**
 ### Default Admin Account
 - **URL**: http://localhost:5000/admin/login
 - **Username**: `admin`
-- **Password**: `0707200717`
+- **Password**: `Admin@123`
 
 ### Create New Admin Account
 - **URL**: http://localhost:5000/admin/signup
@@ -37,7 +37,7 @@ Visit: **http://localhost:5000**
   - Full Name
   - Username (unique)
   - Email (unique)
-  - **Admin Access Code**: `0707200717` ⚠️ **REQUIRED**
+  - **Admin Access Code**: `Admin@123` ⚠️ **REQUIRED**
 
 ### Admin Features
 - ✅ View all cars in dashboard
@@ -56,7 +56,7 @@ Visit: **http://localhost:5000**
 | **Can Book Cars** | ✅ Yes | ❌ No |
 | **Manage Inventory** | ❌ No | ✅ Yes |
 | **Signup Requirement** | Email only | Access Code Required |
-| **Password** | Custom | Must be `0707200717` |
+| **Password** | Custom | Must be `Admin@123` |
 
 ---
 
@@ -70,7 +70,7 @@ Visit: **http://localhost:5000**
 
 ### For Admins:
 1. Click "Admin" (orange button) or go to `/admin/login`
-2. Login or signup with access code `0707200717`
+2. Login or signup with access code `Admin@123`
 3. Add/Edit/Delete cars from dashboard
 4. View booking statistics
 
@@ -78,7 +78,7 @@ Visit: **http://localhost:5000**
 
 ## 🔐 Security Note
 
-**Admin Access Code `0707200717` is required for:**
+**Admin Access Code `Admin@123` is required for:**
 - Creating new admin accounts
 - This code becomes the password for all admin accounts
 - Cannot create admin account without it

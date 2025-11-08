@@ -3,33 +3,33 @@
 ## ✅ FIXED! Admin Login Now Works Properly
 
 ### What Was Fixed:
-1. ✅ Login now only requires **email + password** (like normal)
-2. ✅ No longer asks for Full Name and Phone
-3. ✅ Database admin accounts cleaned and fixed
-4. ✅ All passwords properly hashed
+1. ✅ Admin login requires **all 4 fields** (fullname, email, phone, password)
+2. ✅ All 4 fields are validated against MySQL database
+3. ✅ Password is securely hashed in database
+4. ✅ MySQL connection working properly
 
 ---
 
-## 👥 Available Admin Accounts:
+## 👥 Available Admin Account:
 
-### **Admin #1 (Default Admin)**
-- **Email:** `admin@luxedrive.com`
-- **Password:** `0707200717`
-- Full Name: Admin
-- Phone: 1234567890
+### **Current Admin Account**
+- **Email:** `cute@gmail.com`
+- **Password:** `123456789`
+- Full Name: nana cute
+- Phone: 0987654321
 
-### **Admin #2 (Your Account)**
-- **Email:** `vanna@gmail.com`
-- **Password:** `0707200717`
-- Full Name: len vanna
-- Phone: 090807814
+⚠️ **Note:** Password is now securely hashed in the database
 
 ---
 
 ## 🚀 How to Login:
 
 1. Go to: **http://localhost:5000/admin/login**
-2. Enter **Email** and **Password** only
+2. Enter **ALL 4 fields**:
+   - Full Name: `nana cute`
+   - Email: `cute@gmail.com`
+   - Phone: `0987654321`
+   - Password: `123456789`
 3. Click **Login**
 4. You'll be redirected to admin dashboard
 
@@ -39,26 +39,24 @@
 
 **Login URL:** http://localhost:5000/admin/login
 
-**Try This:**
+**Use These Credentials:**
 ```
-Email: admin@luxedrive.com
-Password: 0707200717
-```
-
-**Or This:**
-```
-Email: vanna@gmail.com
-Password: 0707200717
+Full Name: nana cute
+Email: cute@gmail.com
+Phone: 0987654321
+Password: 123456789
 ```
 
 ---
 
 ## 📝 Notes:
 
-- ✅ Login is now simplified (email + password only)
-- ✅ No more weird "full name + phone" requirement
-- ✅ All passwords are securely hashed in database
-- ✅ Both admin accounts work perfectly
+- ✅ Login requires ALL 4 fields (fullname, email, phone, password)
+- ✅ All fields are validated against MySQL database
+- ✅ Password is securely hashed in database (using Werkzeug security)
+- ✅ MySQL connection working properly
+- ✅ Admin account verified and tested
+- ✅ Phone number normalization (removes non-digits for comparison)
 
 ---
 

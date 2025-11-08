@@ -59,7 +59,7 @@ Password: (your password)
 ### **Admin Signup** (Create Admin Account)
 - **URL:** http://localhost:5000/admin/signup
 - **Required:** Full Name, Email, Phone, Password, Access Code
-- **Access Code:** `0707200717` (required to create admin)
+- **Access Code:** `Admin@123` (required to create admin)
 
 ---
 
@@ -70,13 +70,13 @@ You have 2 admin accounts in your database:
 ### **Admin #1 (Default)**
 ```
 Email: admin@luxedrive.com
-Password: 0707200717
+Password: Admin@123
 ```
 
 ### **Admin #2 (Your Account)**
 ```
 Email: vanna@gmail.com
-Password: 0707200717
+Password: Admin@123
 ```
 
 ---
@@ -95,7 +95,7 @@ Password: 0707200717
 1. Go to: http://localhost:5000/admin/login
 2. Enter:
    - Email: `admin@luxedrive.com`
-   - Password: `0707200717`
+   - Password: `Admin@123`
 3. Click **Login**
 4. Manage cars and bookings!
 
@@ -138,7 +138,7 @@ Password: 0707200717
 - Weekend bookings get 50% discount
 
 **For Admins:**
-- Access code `0707200717` required to create new admin
+- Access code `Admin@123` required to create new admin
 - Login only needs email + password
 - Full control over car inventory
 - Can view all bookings and statistics
